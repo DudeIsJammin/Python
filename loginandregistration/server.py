@@ -4,8 +4,6 @@ from mysqlconnection import MySQLConnector
 app = Flask(__name__)
 app.secret_key = "I'm a secret :D"
 
-flag1 = False;
-
 db = MySQLConnector(app, "login")
 
 @app.route("/")
@@ -16,42 +14,36 @@ def index():
 def create():
     errorcount = 0;
     querycheck = db.query("SELECT * FROM users;")
-    # session["email"] = request.form(email)
 
     if request.form["first"].isalpha() != True:
-        flash("First name can only be alphabetical characters")
-        print "you fucked up"
+        flash("First name can only be alphabetical characters.")
         errorcount += 1
 
     if request.form["last"].isalpha() != True:
-        flash("First name can only be alphabetical characters")
-        print "you fucked up"
+        flash("Last name can only be alphabetical characters.")
         errorcount += 1
 
     if len(request.form["first"]) < 3:
-        flash("First name must be at least 3 characters")
+        flash("You need at least 3 characters in the first name field.")
         errorcount += 1
 
     if len(request.form["last"]) < 3:
-        flash("First name must be at least 3 characters")
+        flash("You need at least 3 characters in the first name field.")
         errorcount += 1
 
     if request.form["password"] != request.form["confirmation"]:
+        flash("Your password has to match.")
         errorcount += 1
-        print "confirm error"
         flash("Your passwords don't match")
 
-    if len(request.form["password"]) < 9:
-        errorcount += 1
-        print "passlength error"
+    if len(request.form["password"]) < 8:
         flash("Your password must be at least 8 characters long")
+        errorcount += 1
 
     for i in querycheck:
         if request.form["email"] == i["email"]:
+            flash("That email address is already taken.")
             errorcount += 1
-            print "Already have that enmail"
-            break
-            flash("That email address is taken")
 
     if errorcount == 0:
         query = "INSERT INTO users(first, last, email, password, createdAt, updatedAt) VALUES (:first, :last, :email, :password, NOW(), NOW());"
@@ -65,7 +57,6 @@ def create():
         db.query(query, data)
 
         return redirect("/success")
-    print errorcount
     return redirect("/")
 @app.route("/success")
 def success():
@@ -87,6 +78,7 @@ def weloginin():
     if bcrypt.checkpw(password, results["password"].encode()):
         return redirect("/home")
     else:
+        flash("Your email and password do not match.")
         return redirect("/login")
 
 
