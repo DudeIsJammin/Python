@@ -9,29 +9,28 @@
             <legend><h1>Registration Form</h1></legend>
             <form action="/success" method="post">
                 <p>First Name:</p>
-                <input type="text" name="first" value="Eduardo">
+                <input type="text" name="first" placeholder="First Name">
                 <p>Last Name:</p>
-                <input type="text" name="last" value="Melean">
+                <input type="text" name="last" placeholder="Last Name">
                 <p>E-mail:</p>
-                <input type="text" name="email" value="silverk2112@gmail.com">
+                <input type="text" name="email" placeholder="example@something.com">
                 <p>Password:</p>
-                <input type="password" name="password" value="ramon">
+                <input type="password" name="password" placeholder="Password">
                 <br>
-                <input type="password" name="confirmation" value="ramon">
+                <input type="password" name="confirmation" placeholder="Password">
                 <br>
-                <input type="submit" name="submit" value="Submit">
+                <input type="submit" name="submit" placeholder="Submit">
             </form>
-
-            <!-- {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul class=flashes>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
                 {% for message in messages %}
-                <li>{{ message }}</li>
+                  <li>{{ message }}</li>
                 {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %} -->
-
+                </ul>
+              {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
         </fieldset>
     </body>
 </html>
