@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>login</title>
+    </head>
+    <body>
+        <fieldset>
+            <legend><h1>Registration Form</h1></legend>
+            <form action="/success" method="post">
+                <p>First Name:</p>
+                <input type="text" name="first" value="Eduardo">
+                <p>Last Name:</p>
+                <input type="text" name="last" value="Melean">
+                <p>E-mail:</p>
+                <input type="text" name="email" value="silverk2112@gmail.com">
+                <p>Password:</p>
+                <input type="password" name="password" value="ramon">
+                <br>
+                <input type="password" name="confirmation" value="ramon">
+                <br>
+                <input type="submit" name="submit" value="Submit">
+            </form>
+
+            <!-- {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %} -->
+
+        </fieldset>
+    </body>
+</html>
